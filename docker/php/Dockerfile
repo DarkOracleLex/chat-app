@@ -6,13 +6,21 @@ WORKDIR /var/www
 RUN apk update && apk add --no-cache \
     bash \
     shadow \
-    libpq-dev
+    libpq-dev \
+    autoconf \
+    gcc \
+    make \
+    g++
 
 # Устанавливаем composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 # Устанавливаем необходимые php расширения
-RUN docker-php-ext-install pdo pdo_pgsql
+RUN docker-php-ext-install pdo pdo_pgsql pcntl
+
+RUN pecl install -o -f redis \
+&&  rm -rf /tmp/pear \
+&&  docker-php-ext-enable redis
 
 # Создаём пользователя и группу www для приложения Laravel
 RUN groupadd -g 1000 www
