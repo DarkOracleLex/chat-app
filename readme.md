@@ -1,6 +1,6 @@
-# chat-app
-
 ## Разворачивание приложения
+
+### Docker
 
 - Настройка файла docker-compose
     - Задать network name
