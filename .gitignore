@@ -1,3 +1,5 @@
 /.fleet
 /.idea
 /.vscode
+
+/src/laravel-echo-server/laravel-echo-server.lock

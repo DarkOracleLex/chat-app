@@ -12,6 +12,18 @@ services:
     networks:
       - chat_app
 
+  websockets:
+    build:
+      context: .
+      dockerfile: ./docker/websockets/Dockerfile
+    container_name: chat_app_websockets
+    ports:
+      - '6001:6001'
+    volumes:
+      - ./src/laravel-echo-server:/var/www
+    networks:
+      - chat_app
+
   php:
     build:
       context: .

@@ -14,5 +14,5 @@ use Illuminate\Support\Facades\Broadcast;
 */
 
 Broadcast::channel('test', function () {
-    return 'test';
+    return true;
 });
