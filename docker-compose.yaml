@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:1.24.0-alpine
+    container_name: chat_app_nginx
+    ports:
+      - '80:80'
+    volumes:
+      - ./src/laravel/public:/var/www/public
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    networks:
+      - chat_app
+
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    container_name: chat_app_php
+    volumes:
+      - ./src/laravel:/var/www
+    depends_on:
+      - nginx
+      - postgresql
+      - redis
+    networks:
+      - chat_app
+
+  postgresql:
+    image: postgres:15.3-alpine
+    container_name: chat_app_postgresql
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: laravel_docker_template
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+    networks:
+      - chat_app
+
+  adminer:
+    image: adminer:4.8.1
+    container_name: chat_app_adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgresql
+    environment:
+      ADMINER_DEFAULT_SERVER: postgresql
+    networks:
+      - chat_app
+
+  redis:
+    image: redis:7.0.12-alpine
+    container_name: chat_app_redis
+    ports:
+      - "6379:6379"
+    command: redis-server --save 20 1 --loglevel warning --requirepass 12345
+    volumes:
+      - redis_data:/data
+    networks:
+      - chat_app
+
+networks:
+  chat_app:
+    name: chat_app
+
+volumes:
+  postgresql_data:
+    name: chat_app_postgresql_data
+  redis_data:
+    name: chat_app_redis_data
