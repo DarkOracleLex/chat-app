@@ -14,7 +14,7 @@ class TranslationMessage extends Command
     {
         event(new TranslationEvent(
             $this->argument('id'),
-            $this->argument('message')
+            $this->argument('message'),
         ));
     }
 }

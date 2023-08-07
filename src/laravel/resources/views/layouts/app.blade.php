@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" value="{{ csrf_token() }}"/>
     <title>Chat App</title>
+    <script src="//localhost:6001/socket.io/socket.io.js"></script>
     @vite("resources/sass/app.scss")
 </head>
 <body>

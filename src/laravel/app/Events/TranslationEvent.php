@@ -26,6 +26,6 @@ class TranslationEvent implements ShouldBroadcast
 
     public function broadcastOn(): Channel
     {
-        return new Channel('translation_' . $this->id);
+        return new Channel('translation.' . $this->id);
     }
 }

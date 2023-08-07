@@ -23,8 +23,8 @@ export default {
     },
 
     created() {
-        Echo.channel(`translation_${this.translation_id}`)
-            .listen('App\\Events\\TranslationEvent', (e) => {
+        Echo.channel(`translation.${this.translation_id}`)
+            .listen('TranslationEvent', (e) => {
                 this.messages.push(e)
             });
     }
