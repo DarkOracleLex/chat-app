@@ -10,7 +10,8 @@ RUN apk update && apk add --no-cache \
     autoconf \
     gcc \
     make \
-    g++
+    g++ \
+    npm
 
 # Устанавливаем composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
