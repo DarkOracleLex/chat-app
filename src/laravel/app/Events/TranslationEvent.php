@@ -24,10 +24,8 @@ class TranslationEvent implements ShouldBroadcast
         $this->message = $message;
     }
 
-    public function broadcastOn(): array
+    public function broadcastOn(): Channel
     {
-        return [
-            new Channel('translation_'. $this->id),
-        ];
+        return new Channel('translation_' . $this->id);
     }
 }

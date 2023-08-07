@@ -23,9 +23,8 @@ export default {
     },
 
     created() {
-        Echo.channel(`laravel_database_translation_.${this.translation_id}`)
-            .listen('TranslationEvent', (e) => {
-                console.log(e);
+        Echo.channel(`translation_${this.translation_id}`)
+            .listen('App\\Events\\TranslationEvent', (e) => {
                 this.messages.push(e)
             });
     }
