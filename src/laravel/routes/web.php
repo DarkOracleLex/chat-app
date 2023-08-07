@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/translation/{id}', [TranslationController::class, 'index']);
+Route::post('/translation/{id}', [TranslationController::class, 'send']);
