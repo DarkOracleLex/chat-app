@@ -11,7 +11,10 @@ RUN apk update && apk add --no-cache \
     gcc \
     make \
     g++ \
-    npm
+    npm \
+    py3-setuptools \
+    python3 \
+    supervisor
 
 # Устанавливаем composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
@@ -26,6 +29,8 @@ RUN pecl install -o -f redis \
 # Создаём пользователя и группу www для приложения Laravel
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
+
+# RUN supervisorctl reread
 
 # Меняем пользователя на www
 USER www

@@ -20,7 +20,7 @@ services:
     ports:
       - '6001:6001'
     volumes:
-      - ./src/laravel-echo-server:/var/www
+      - ./docker/websockets/www:/var/www
     networks:
       - chat_app
 
@@ -33,6 +33,7 @@ services:
       - ./src/laravel:/var/www
     depends_on:
       - nginx
+      - websockets
       - postgresql
       - redis
     networks:

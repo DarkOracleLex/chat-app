@@ -2,4 +2,4 @@
 /.idea
 /.vscode
 
-/src/laravel-echo-server/laravel-echo-server.lock
+/docker/websockets/www/laravel-echo-server.lock
